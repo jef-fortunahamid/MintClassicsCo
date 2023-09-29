@@ -32,11 +32,9 @@ FROM warehouses;
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/c9685246-845b-4636-975f-0aacc41a03a1)
 
-Looking at the table, there are four warehouses, where the `warehouseCode` and `warehouseName` are provided for each. The third column is `warehousePctCap`, which we can assume it is the 'Percentage Capacity' of each warehouse. Warehouse c (West) has the lowest percentage capacity, where the least number of stocks where we can relocate to the other warehouses. Warehouses a (North), b (East) and d (South) have percent capacity of 72, 67 and 75 percent, respectively. A total of 85 percent free space from all three warehouses.
+Looking at the table, there are four warehouses, where the `warehouseCode` and `warehouseName` are provided for each. The third column is `warehousePctCap`, which we can assume it is the 'Percentage Capacity' of each warehouse. 
 
-Unfortunately, we don't have the exact location of each warehouse. We can include this on our 'Recommendation for Further Study'.
-
-Now, we proceed to explore more of the tables of interest.
+We've got 72%, 67%, 50% and 75 % capacity for warehouse a, b, c and d, respectively. Looking at this table, warehouse c has a lot of space to be filled. We need to look at the inventory stock at each warehouse. Now, we proceed to explore more of the tables of interest.
 
 *products Table*
 ```sql
@@ -91,21 +89,8 @@ GROUP BY
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/c3f8a4d6-a060-4bd3-8183-e208bffcee32)
 
-But we can't just assume these numbers correspond to the Percentage Capacity of each warehouse. We need to look at the `productScale`, as each item has different dimensions (unfortunately, they are not provided on our table). The following table shows the unique `productScale`.
-```sql
-SELECT
-    DISTINCT(productScale)
-FROM products
-ORDER BY
-    productScale;
-```
-![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/45dc6c6c-fbcd-4d2e-a280-5e1e3a709e4a)
-
-This column likely represents the scale of the model cars, expressed as a ratio of the size of the model to the size of the actual item. For example, a product scale of "1:32" would indicate that the model is 1/32 the size of the actual item. The smaller the second number in the ratio, the larger the model will be. For instance, a "1:18" scale model would be larger than a "1:72" scale model.
-
-We can use this to calulate the ratio of each item and calculate each item percentage capacity in each warehouse. This is a possible solution to rearranging the items and distribute stocks in warehouse c(West) to the other three warehouses.
-
-
+With this new information, warehouse 'd' has the least items in stock. We can consider this warehouse as a posible warehouse for closure, as it has least number of stocks to redistribute, less expense to be made
 
 The next step we could tackle is in terms of sale. We can identify items that are selling the least and we can 
 
+#### Sales
