@@ -190,33 +190,33 @@ WHERE NOT EXISTS (
 Items that are overstocked are:
 ```sql
 WITH cte_inventory_status AS (
-	SELECT
-		p.productCode
-		, p.warehouseCode
-		, p.quantityInStock
-		, SUM(od.quantityOrdered) AS total_ordered_item
-		, p.quantityInStock - SUM(od.quantityOrdered) AS diff_stock_vs_sales
-		, CASE 
-				WHEN (p.quantityInStock - SUM(od.quantityOrdered)) > (2 * SUM(od.quantityOrdered)) THEN 'Overstocked'
-				WHEN (p.quantityInStock - SUM(od.quantityOrdered)) < 500 THEN 'Understocked'
-				ELSE 'Well-Stocked'
-			END AS inventory_status
-	FROM products p
-	JOIN orderdetails od
-		ON p.productCode = od.productCode
-	JOIN orders o
-		ON od.orderNumber = o.orderNumber
-	WHERE
-		o.status IN('Shipped', 'Resolved')
-	GROUP BY 
-		p.productCode
-		, p.warehouseCode
-	ORDER BY
-		warehouseCode
-		, diff_stock_vs_sales DESC
+    SELECT
+          p.productCode
+        , p.warehouseCode
+        , p.quantityInStock
+        , SUM(od.quantityOrdered) AS total_ordered_item
+        , p.quantityInStock - SUM(od.quantityOrdered) AS diff_stock_vs_sales
+        , CASE 
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) > (2 * SUM(od.quantityOrdered)) THEN 'Overstocked'
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) < 500 THEN 'Understocked'
+            ELSE 'Well-Stocked'
+              END AS inventory_status
+    FROM products p
+    JOIN orderdetails od
+        ON p.productCode = od.productCode
+    JOIN orders o
+        ON od.orderNumber = o.orderNumber
+    WHERE
+        o.status IN('Shipped', 'Resolved')
+    GROUP BY 
+          p.productCode
+        , p.warehouseCode
+    ORDER BY
+          warehouseCode
+        , diff_stock_vs_sales DESC
 )
 SELECT
-	productCode
+      productCode
     , quantityInStock
     , warehouseCode
 FROM cte_inventory_status
@@ -224,7 +224,45 @@ WHERE inventory_status = 'Overstocked'
 ORDER BY warehouseCode;
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0664bf95-69aa-48f2-ac63-7045b1e55f89)
+
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/10ade47a-9b96-47d9-ae18-29ca0359dc11)
+
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/1f7e0a99-00d4-47a7-882a-435faa380343)
 
-
+These are the in-demand items, which are understocked, that needs to be restocked.
+```sql
+WITH cte_inventory_status AS (
+    SELECT
+          p.productCode
+        , p.warehouseCode
+        , p.quantityInStock
+        , SUM(od.quantityOrdered) AS total_ordered_item
+        , p.quantityInStock - SUM(od.quantityOrdered) AS diff_stock_vs_sales
+        , CASE 
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) > (2 * SUM(od.quantityOrdered)) THEN 'Overstocked'
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) < 500 THEN 'Understocked'
+            ELSE 'Well-Stocked'
+              END AS inventory_status
+    FROM products p
+    JOIN orderdetails od
+        ON p.productCode = od.productCode
+    JOIN orders o
+        ON od.orderNumber = o.orderNumber
+    WHERE
+        o.status IN('Shipped', 'Resolved')
+    GROUP BY 
+          p.productCode
+        , p.warehouseCode
+    ORDER BY
+          warehouseCode
+        , diff_stock_vs_sales DESC
+)
+SELECT
+      productCode
+    , quantityInStock
+    , warehouseCode
+FROM cte_inventory_status
+WHERE inventory_status = 'Understocked'
+ORDER BY warehouseCode;
+```
+![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/d08f8b53-0d48-407d-99ed-ba48dab4ec1f)
