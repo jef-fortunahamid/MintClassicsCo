@@ -34,7 +34,7 @@ FROM warehouses;
 
 Looking at the table, there are four warehouses, where the `warehouseCode` and `warehouseName` are provided for each. The third column is `warehousePctCap`, which we can assume it is the 'Percentage Capacity' of each warehouse. Warehouse c (West) has the lowest percentage capacity, where the least number of stocks where we can relocate to the other warehouses. Warehouses a (North), b (East) and d (South) have percent capacity of 72, 67 and 75 percent, respectively. A total of 85 percent free space from all three warehouses.
 
-Unfortunately, we don't have the exact location of each warehouse. We can include this to our 'Reccommendation for Further Study'.
+Unfortunately, we don't have the exact location of each warehouse. We can include this on our 'Recommendation for Further Study'.
 
 Now, we proceed to explore more of the tables of interest.
 
@@ -78,37 +78,34 @@ HAVING
 
 There is zero or no row/s or value/s returned with this query. We can say, each warehouse stores unique items.
 
-We can run the following query to know products being stored on each warehouse:
-```sql
-SELECT
-      warehouseCode
-    , productCode
-    , quantityInStock
-FROM products
-WHERE
-    warehouseCode = 'a';
-```
-![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0ae2efa4-17b7-45ae-b2db-44d25c4f55ff)
-![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/1ef97765-33d0-456a-931b-5065fa25f46b)
-
-![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/6306ea5f-6e06-4a15-be1a-9e4c1adfb3f7)
-![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0718bd3c-3c4f-48cf-81d2-eb5529ee5069)
-
-We explore the total stock stored on each warehosue with the follwoing query:
+We explore the total stock stored on each warehosue with the following query:
 ```sql
 SELECT
       w.warehouseName
     , SUM(p.quantityInStock) AS total_stock_stored
 FROM products p 
 JOIN warehouses w
-	ON p.warehouseCode = w.warehouseCode
+    ON p.warehouseCode = w.warehouseCode
 GROUP BY
-	w.warehouseName;
+    w.warehouseName;
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/c3f8a4d6-a060-4bd3-8183-e208bffcee32)
 
+But we can't just assume these numbers correspond to the Percentage Capacity of each warehouse. We need to look at the `productScale`, as each item has different dimensions (unfortunately, they are not provided on our table). The following table shows the unique `productScale`.
+```sql
+SELECT
+    DISTINCT(productScale)
+FROM products
+ORDER BY
+    productScale;
+```
+![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/45dc6c6c-fbcd-4d2e-a280-5e1e3a709e4a)
+
+This column likely represents the scale of the model cars, expressed as a ratio of the size of the model to the size of the actual item. For example, a product scale of "1:32" would indicate that the model is 1/32 the size of the actual item. The smaller the second number in the ratio, the larger the model will be. For instance, a "1:18" scale model would be larger than a "1:72" scale model.
+
+We can use this to calulate the ratio of each item and calculate each item percentage capacity in each warehouse. This is a possible solution to rearranging the items and distribute stocks in warehouse c(West) to the other three warehouses.
 
 
 
-
+The next step we could tackle is in terms of sale. We can identify items that are selling the least and we can 
 
