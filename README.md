@@ -6,7 +6,7 @@
 The goal of this project is to explore the company's current inventory and make data-driven recommendations on how to reorganise or if possible, reduce it. The ultimate aim is to close one storage facility while exnsuring  products are still shipped to customers within 24 hours.
 
 ## Summary
-The analysis revealed that 'Warehouse d (South)' is the most suitable candidate for closure due to its low inventory levels, thus minimising redistribution costs. Moreover, the study identified various products that are either overstocked or understocked, rpoviding an opportunity to inventory optimisation.
+The analysis revealed that 'Warehouse d (South)' is the most suitable candidate for closure due to its low inventory levels, thus minimising redistribution costs. Moreover, the study identified various products that are either overstocked or understocked, providing an opportunity to inventory optimisation.
 
 ## Recommendation
 
