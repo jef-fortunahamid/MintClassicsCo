@@ -5,7 +5,22 @@
 ## Business Task
 The goal of this project is to explore the company's current inventory and make data-driven recommendations on how to reorganise or if possible, reduce it. The ultimate aim is to close one storage facility while exnsuring  products are still shipped to customers within 24 hours.
 
+## Summary
+The analysis revealed that 'Warehouse d (South)' is the most suitable candidate for closure due to its low inventory levels, thus minimising redistribution costs. Moreover, the study identified various products that are either overstocked or understocked, rpoviding an opportunity to inventory optimisation.
+
+## recommendation
+
+1. **Close Warehouse 'd'**: Given its low inventory levels, it's recommended to close warehouse 'd' to save on operational costs.
+2. **Inventory Redistribution**: Overstocked items should be reduced, especially in warehouses 'a' and 'b', to make room for the inventory from closing warehouse 'd'.
+3. **Product Line Optimisation**: The product **1985 Toyota Supra** has never been ordered and should be considered for removal from the product line, freeing up more space.
+4. **Restock Understocked Items**: Items identified as 'Understocked should be restocked to meet demand.
+5. **Regular Monitoring**: Implement a real-time inventory monitoring system to better match suppky with demand, reducing carrying costs and improving customer satisfaction.
+
 ## Techniques Used
+- Aggregation and Joins: The use of SQL aggregation functions like SUM() and joins helped to summarize inventory levels across different warehouses.
+- Sub-queries and CTEs: Common Table Expressions (CTEs) and sub-queries were used to isolate specific sets of data for more complex analyses.
+- Conditional Logic: CASE statements in SQL were employed to categorize inventory as 'Overstocked,' 'Understocked,' or 'Well-Stocked' based on certain conditions.
+- Filtering: The WHERE clause and the HAVING clause were extensively used to filter data based on certain conditions like order status.
 
 ## Entity-Relations Diagram
 
