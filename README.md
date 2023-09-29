@@ -148,40 +148,42 @@ From this query, there are only 109 rows returned.
 From our earlier query, there are 110 items on our product line. There is one item that we can drop from our product line. With the following query we can identify which item that has never been ordered:
 ```sql
 WITH cte_inventory_status AS (
-	SELECT
-		p.productCode
-		, p.warehouseCode
-		, p.quantityInStock
-		, SUM(od.quantityOrdered) AS total_ordered_item
-		, p.quantityInStock - SUM(od.quantityOrdered) AS diff_stock_vs_sales
-		, CASE 
-				WHEN (p.quantityInStock - SUM(od.quantityOrdered)) > (2 * SUM(od.quantityOrdered)) THEN 'Overstocked'
-				WHEN (p.quantityInStock - SUM(od.quantityOrdered)) < 500 THEN 'Understocked'
-				ELSE 'Well-Stocked'
-			END AS inventory_status
-	FROM products p
-	JOIN orderdetails od
-		ON p.productCode = od.productCode
-	JOIN orders o
-		ON od.orderNumber = o.orderNumber
-	WHERE
-		o.status IN('Shipped', 'Resolved')
-	GROUP BY 
-		p.productCode
-		, p.warehouseCode
-	ORDER BY
-		warehouseCode
-		, diff_stock_vs_sales DESC
+    SELECT
+          p.productCode
+        , p.warehouseCode
+        , p.quantityInStock
+        , SUM(od.quantityOrdered) AS total_ordered_item
+        , p.quantityInStock - SUM(od.quantityOrdered) AS diff_stock_vs_sales
+        , CASE 
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) > (2 * SUM(od.quantityOrdered)) THEN 'Overstocked'
+            WHEN (p.quantityInStock - SUM(od.quantityOrdered)) < 500 THEN 'Understocked'
+            ELSE 'Well-Stocked'
+              END AS inventory_status
+    FROM products p
+    JOIN orderdetails od
+        ON p.productCode = od.productCode
+    JOIN orders o
+        ON od.orderNumber = o.orderNumber
+    WHERE
+        o.status IN('Shipped', 'Resolved')
+    GROUP BY 
+          p.productCode
+        , p.warehouseCode
+    ORDER BY
+          warehouseCode
+        , diff_stock_vs_sales DESC
 )
 SELECT
-	productCode
+      productCode
     , productName
 FROM products p
-WHERE NOT EXISTS (
-					SELECT 1
-                    FROM cte_inventory_status cis
-                    WHERE p.productCode = cis.productCode
-);
+WHERE NOT EXISTS
+      (
+       SELECT 1
+       FROM cte_inventory_status cis
+       WHERE p.productCode = cis.productCode
+      )
+;
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/89fe7193-3b13-4860-ad7d-8e921e15c861)
 
