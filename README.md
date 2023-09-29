@@ -51,8 +51,8 @@ LIMIT 10;
 With this table, the inventory of our stocks is provided on this table.
 ```sql
 SELECT
-	DISTINCT(productCode)
-	, productName
+      DISTINCT(productCode)
+    , productName
 FROM products;
 ```
 ![Screenshot 2023-09-29 at 8 48 26 am](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/e1e98105-42c4-4f0f-a85f-df5a3b674eee)
@@ -64,15 +64,16 @@ There are 110 products on our list.
 With this information, we need to know if the same products are stored in one or more than one warehouse. So we need to look for the products with the same `productName` but different `warehouseCode` using the following query:
 ```sql
 SELECT
-	productCode
+      productCode
     , COUNT(warehouseCode) AS number_of_warehouse
 FROM products
 GROUP BY 
-	productCode
+    productCode
 HAVING 
-	COUNT(warehouseCode) > 1;
+    COUNT(warehouseCode) > 1;
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/e0271316-214d-4ded-97b1-157936fef164)
+
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/ea217d97-982a-4f27-ad6d-01a8ecb28c62)
 
 There is zero or no row/s or value/s returned with this query. We can say, each warehouse stores unique items.
@@ -80,15 +81,16 @@ There is zero or no row/s or value/s returned with this query. We can say, each 
 We can run the following query to know products beinf stored on each warehouse:
 ```sql
 SELECT
-	  warehouseCode
-	, productCode
+      warehouseCode
+    , productCode
     , quantityInStock
 FROM products
 WHERE
-	  warehouseCode = 'a';
+    warehouseCode = 'a';
 ```
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0ae2efa4-17b7-45ae-b2db-44d25c4f55ff)
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/1ef97765-33d0-456a-931b-5065fa25f46b)
+
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/6306ea5f-6e06-4a15-be1a-9e4c1adfb3f7)
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0718bd3c-3c4f-48cf-81d2-eb5529ee5069)
 
