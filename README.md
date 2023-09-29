@@ -1,6 +1,6 @@
 # Optimising Inventory for Strategic Warehouse Closure at Mint Classics Company
 
-*(This case study is provided by Coursera.The SQL schema file for setting up the Mint Classics database was oprovided.)*
+*(This case study is provided by Coursera. The SQL schema file for setting up the Mint Classics database was oprovided.)*
 
 ## Business Task
 The goal of this project is to explore the company's current inventory and make data-driven recommendations on how to reorganise or if possible, reduce it. The ultimate aim is to close one storage facility while exnsuring  products are still shipped to customers within 24 hours.
@@ -15,9 +15,17 @@ The goal of this project is to explore the company's current inventory and make 
 
 The SQL schema file, where we used DDL (Data Definition Language) and DML (Data Manipulation Language) file to create the database structure in MySQL workbench, was provided.
 
+Looking at our ER Diagram, there are nine tables in our database. Now, let's explore our `mintclassics` database.
+
+Before we start, on MySQL workbench we need to run the following query:
+```sql
+USE mintclassics;
+```
+We need to run this code, if you have more than one database installed on your MySQL workbench (like mine, there are four other databases installed). So we don't have to keep referring the `mintclassics` database on our FROM clause.
+
 #### Getting Familiar with Data
 
-Let's look at the table with atmost important, the `warehouses' table.
+Let's look at the table with atmost important, the `warehouses` table.
 ```sql
 SELECT *
 FROM warehouses;
