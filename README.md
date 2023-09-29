@@ -8,7 +8,7 @@ The goal of this project is to explore the company's current inventory and make 
 ## Summary
 The analysis revealed that 'Warehouse d (South)' is the most suitable candidate for closure due to its low inventory levels, thus minimising redistribution costs. Moreover, the study identified various products that are either overstocked or understocked, rpoviding an opportunity to inventory optimisation.
 
-## recommendation
+## Recommendation
 
 1. **Close Warehouse 'd'**: Given its low inventory levels, it's recommended to close warehouse 'd' to save on operational costs.
 2. **Inventory Redistribution**: Overstocked items should be reduced, especially in warehouses 'a' and 'b', to make room for the inventory from closing warehouse 'd'.
@@ -18,7 +18,7 @@ The analysis revealed that 'Warehouse d (South)' is the most suitable candidate 
 
 ## Techniques Used
 - Aggregation and Joins: The use of SQL aggregation functions like SUM() and joins helped to summarize inventory levels across different warehouses.
-- Sub-queries and CTEs: Common Table Expressions (CTEs) and sub-queries were used to isolate specific sets of data for more complex analyses.
+- JOINS, Sub-queries and CTEs: JOINS, Common Table Expressions (CTEs) and sub-queries were used to isolate specific sets of data for more complex analyses.
 - Conditional Logic: CASE statements in SQL were employed to categorize inventory as 'Overstocked,' 'Understocked,' or 'Well-Stocked' based on certain conditions.
 - Filtering: The WHERE clause and the HAVING clause were extensively used to filter data based on certain conditions like order status.
 
