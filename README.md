@@ -78,7 +78,7 @@ HAVING
 
 There is zero or no row/s or value/s returned with this query. We can say, each warehouse stores unique items.
 
-We can run the following query to know products beinf stored on each warehouse:
+We can run the following query to know products being stored on each warehouse:
 ```sql
 SELECT
       warehouseCode
@@ -94,6 +94,18 @@ WHERE
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/6306ea5f-6e06-4a15-be1a-9e4c1adfb3f7)
 ![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/0718bd3c-3c4f-48cf-81d2-eb5529ee5069)
 
+We explore the total stock stored on each warehosue with the follwoing query:
+```sql
+SELECT
+      w.warehouseName
+    , SUM(p.quantityInStock) AS total_stock_stored
+FROM products p 
+JOIN warehouses w
+	ON p.warehouseCode = w.warehouseCode
+GROUP BY
+	w.warehouseName;
+```
+![image](https://github.com/jef-fortunahamid/MintClassicsCo/assets/125134025/c3f8a4d6-a060-4bd3-8183-e208bffcee32)
 
 
 
