@@ -192,6 +192,8 @@ WITH cte_inventory_status AS (
 SELECT
       productCode
     , productName
+    , quantityInStock
+    , warehouseCode
 FROM products p
 WHERE NOT EXISTS
       (
