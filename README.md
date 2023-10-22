@@ -1,6 +1,6 @@
 # Optimising Inventory for Strategic Warehouse Closure at Mint Classics Company
 
-*(This case study is provided by Coursera. The SQL schema file for setting up the Mint Classics database was oprovided.)*
+*(This case study is provided by Coursera. The SQL schema file for setting up the Mint Classics database was provided.)*
 
 ## Business Task
 The goal of this project is to explore the company's current inventory and make data-driven recommendations on how to reorganise or if possible, reduce it. The ultimate aim is to close one storage facility while exnsuring  products are still shipped to customers within 24 hours.
